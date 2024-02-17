@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Page</title>
+</head>
+<body>
+    <h1>Welcome to GitHub Analytics Streaming!</h1>
+    <ul>
+        <h3><li><a href="{{ url_for('updated_repos') }}">Most Updated Repositories</a></li><br>
+        <li><a href="{{ url_for('popular_languages') }}">Most Popular Repository Languages</a></li><br>
+        <li><a href="{{ url_for('tdd_languages') }}">Most Popular TDD Languages</a></li><br>
+        <li><a href="{{ url_for('tdd_devops_languages') }}">Most Popular TDD and DevOps Languages</a></li></h3>
+    </ul>
+</body>
+</html>

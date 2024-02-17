@@ -1,0 +1,3 @@
+# development server and åroduciton server is not existing at the moment, but it could look somthing like:
+prod_home: /technical-training/DEII_PROJECT_2/production_server
+dev_home: /technical-training/DEII_PROJECT_2/development_server

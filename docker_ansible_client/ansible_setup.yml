@@ -1,0 +1,31 @@
+#Might be uneccessary, the idea was to automate the process but if we can run it manually on client
+#that is better.
+#Need to install packages prior and source the UPPMAX--.sh file 
+
+---
+- name: Setup Ansible System
+  hosts: localhost
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Execute start_instances.py script
+      command: python3 start_instances.py
+      args:
+        #this will make it look for the script in the same directory as the playbook
+        chdir: "{{ playbook_dir }}"
+#the python file should create ansible file directly, Ansible need to be installed prior
+  handlers:
+    - name: Run Ansible Playbook
+      ansible.builtin.command: export ANSIBLE_HOST_KEY_CHECKING=False
+
+
+- name: Run configuration playbook
+  hosts: ubuntu
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Execute configuration playbook
+      ansible.builtin.command: ansible-playbook configuration.yml --private-key=/home/ubuntu/cluster-keys/cluster-key
+
+...
+

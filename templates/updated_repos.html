@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Top N Most Frequently Updated Repositories</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <h1 id="title">Top N Most Frequently Updated Repositories</h1>
+     <div>
+      <label>Select number of top repositories to display: </label>
+      <input type="text" id="numTopStats" name="numTopStats" maxlength="2" min="0" value="10">
+      <input type="submit" value="Submit" onclick="updateGraph()">
+    </div>
+
+    <div id="chart"></div> <!-- Container for the graph -->
+
+    <br><br>
+    <i><h4 id="statsInfo"></h4></i>
+    <a href="../"><input type="button" value="Back"/></a>
+
+    <script>
+      const repos = JSON.parse('{{ repos | tojson }}'); // Convert generated language stats to JSON format
+      
+      function updateGraph() {
+        let num_top_stats = parseInt(document.getElementById('numTopStats').value);  // Get num top stats display
+        num_top_stats = num_top_stats > 0 ? num_top_stats : 10;  // Set to default 10 if input value invalid
+        const display_repos = repos.slice(0, num_top_stats);  // Slice the array to get the top N languages
+
+        // Dynamically set the header and footer text
+        document.getElementById("title").innerHTML = "Top " + (num_top_stats < 10 ? '0' + num_top_stats : num_top_stats)
+                + " Most Frequently Updated Repositories from {{ min_date }} to {{ max_date }}";
+        document.getElementById("statsInfo").innerHTML =
+            "Statistics generated from sample size of {{ sample }} out of estimated population size: {{ population }}.";
+
+        // Generate the graph using Plotly.js
+        const data = [{
+          x: display_repos.map(repos => repos[0]),
+          y: display_repos.map(repos => repos[1][0]),
+          type: 'bar'
+        }];
+        Plotly.newPlot('chart', data);
+      }
+      
+      // Initialize the graph with default values
+      updateGraph();
+    </script>
+  </body>
+</html>
+
