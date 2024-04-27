@@ -1,5 +1,5 @@
 # Data Engineering II - Project 2
-
+GitHub Analytic System leverages Apache Pulsar and MongoDB to create a scalable streaming framework for real-time analysis of GitHub repository data. With parallelized data fetching and preprocessing, it offers insights into repository trends and programming language usage patterns. The system features a dynamic web UI for interactive visualization of top repository metrics.
 ## Instructions
 
 ### Authentication
